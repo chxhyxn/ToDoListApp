@@ -41,9 +41,16 @@
                                                         <constraint firstAttribute="width" constant="30" id="bU4-OE-50R"/>
                                                     </constraints>
                                                     <color key="tintColor" systemColor="secondaryLabelColor"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system">
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20" weight="regular"/>
-                                                    </buttonConfiguration>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="circle" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="bold"/>
+                                                    </state>
+                                                    <state key="selected" image="checkmark.circle" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="bold"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="tapBtnCheck:" destination="Rx4-wT-EJF" eventType="touchUpInside" id="gqT-kt-j3u"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblTodo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Oe-T7-bd8">
                                                     <rect key="frame" x="51" y="15" width="312" height="30"/>
@@ -60,22 +67,26 @@
                                                     <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="4iK-Io-l2Q"/>
+                                                        <constraint firstAttribute="width" constant="327" id="y5Q-RE-SPE"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYp-mk-tiJ">
+                                                <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IYp-mk-tiJ">
                                                     <rect key="frame" x="376" y="15" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="2SG-4u-zTn"/>
                                                         <constraint firstAttribute="width" constant="30" id="OOD-mf-PM9"/>
                                                     </constraints>
                                                     <color key="tintColor" systemColor="secondaryLabelColor"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system">
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20" weight="regular"/>
-                                                    </buttonConfiguration>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="xmark.circle.fill" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="bold"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="tapBtnDelete:" destination="Rx4-wT-EJF" eventType="touchUpInside" id="6dZ-UR-WZ0"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="EFw-mt-nQM" firstAttribute="width" secondItem="6Oe-T7-bd8" secondAttribute="width" multiplier="1.04887" id="4iS-IN-w0R"/>
                                                 <constraint firstItem="EFw-mt-nQM" firstAttribute="centerX" secondItem="6Oe-T7-bd8" secondAttribute="centerX" id="924-Ga-sgR"/>
                                                 <constraint firstItem="fmU-9e-MW2" firstAttribute="leading" secondItem="Nso-Kx-1rv" secondAttribute="leading" constant="8" id="C7q-f2-03M"/>
                                                 <constraint firstItem="EFw-mt-nQM" firstAttribute="centerY" secondItem="Nso-Kx-1rv" secondAttribute="centerY" id="JIl-pa-IJB"/>
@@ -93,6 +104,7 @@
                                             <outlet property="btnDelete" destination="IYp-mk-tiJ" id="5Mn-Ln-Hj3"/>
                                             <outlet property="lblTodo" destination="6Oe-T7-bd8" id="BMH-5I-D0W"/>
                                             <outlet property="viewStrikeThrough" destination="EFw-mt-nQM" id="Nvu-nZ-9W5"/>
+                                            <outlet property="viewStrikeThroughWidth" destination="y5Q-RE-SPE" id="EIc-rY-KHL"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -169,14 +181,14 @@
                             <tableViewSection headerTitle="Example TodoList App" id="usC-gN-Pdj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="UX4-JP-iVU">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="39.5"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UX4-JP-iVU" id="d2m-9O-Wl0">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Support" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGM-63-2tf">
-                                                    <rect key="frame" x="20" y="6" width="334" height="28"/>
+                                                    <rect key="frame" x="20" y="6" width="334" height="28.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -191,14 +203,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BQQ-JU-3Ep">
-                                        <rect key="frame" x="20" y="89" width="374" height="39.5"/>
+                                        <rect key="frame" x="20" y="89.5" width="374" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BQQ-JU-3Ep" id="nsi-AS-hU0">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odJ-FO-F21">
-                                                    <rect key="frame" x="20" y="6" width="334" height="28"/>
+                                                    <rect key="frame" x="20" y="6" width="334" height="28.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -213,14 +225,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RNT-DL-5he">
-                                        <rect key="frame" x="20" y="128.5" width="374" height="40"/>
+                                        <rect key="frame" x="20" y="129.5" width="374" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RNT-DL-5he" id="6XR-8W-IQL">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoZ-o5-qfW">
-                                                    <rect key="frame" x="20" y="6" width="334" height="28.5"/>
+                                                    <rect key="frame" x="20" y="6" width="334" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
