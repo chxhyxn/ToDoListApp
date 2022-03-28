@@ -8,15 +8,34 @@
 import UIKit
 
 class TodoListViewController: UIViewController {
-
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var inputViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var tfInputTodo: UITextField!
+    @IBOutlet weak var btnToday: UIButton!
+    @IBOutlet weak var btnAdd: UIButton!
+    
     let todoListViewModel = TodoViewModel()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         todoListViewModel.loadTasks()
+        
+//        let todo = TodoManager.shared.createTodo(detail: "Test Todo", isToday: true)
+//        Storage.saveTodo(todo, fileName: "Test.json")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let todo = Storage.restoreTodo("Test.json")
+//        print("---> restore from disk: \(todo)")
+    }
+    
+    @IBAction func tapBtnToday(_ sender: UIButton) {
+        btnToday.isSelected = !btnToday.isSelected
+    }
+    
+    @IBAction func tapBtnAdd(_ sender: UIButton) {
     }
 }
 
