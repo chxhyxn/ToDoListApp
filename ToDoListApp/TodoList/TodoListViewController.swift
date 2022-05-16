@@ -18,6 +18,12 @@ class TodoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustInputView), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        
         todoListViewModel.loadTasks()
         
 //        let todo = TodoManager.shared.createTodo(detail: "Test Todo", isToday: true)
@@ -36,6 +42,37 @@ class TodoListViewController: UIViewController {
     }
     
     @IBAction func tapBtnAdd(_ sender: UIButton) {
+        guard let detail = tfInputTodo.text, detail.isEmpty == false else {
+            return
+        }
+        let todo = TodoManager.shared.createTodo(detail: detail, isToday: btnToday.isSelected)
+        
+        todoListViewModel.addTodo(todo)
+        collectionView.reloadData()
+        tfInputTodo.text = ""
+        btnToday.isSelected = false
+    }
+    @IBAction func tapBG(_ sender: Any) {
+        tfInputTodo.resignFirstResponder()
+    }
+    
+}
+
+extension TodoListViewController {
+    @objc private func adjustInputView(noti: Notification) {
+        guard let userInfo = noti.userInfo else {
+            return
+        }
+        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        if noti.name == UIResponder.keyboardWillShowNotification {
+            let adjustment = keyboardFrame.height - view.safeAreaInsets.bottom
+            inputViewBottom.constant = adjustment
+        }else {
+            inputViewBottom.constant = 0
+        }
     }
 }
 
@@ -63,6 +100,19 @@ extension TodoListViewController: UICollectionViewDataSource {
             todo = todoListViewModel.upcompingTodos[indexPath.item]
         }
         cell.updateUI(todo: todo)
+        
+        cell.doneButtonTapHandler = { isDone in
+            todo.isDone = isDone
+            self.todoListViewModel.updateTodo(todo)
+            self.collectionView.reloadData()
+        }
+        
+        cell.deleteButtonTapHandler = {
+            self.todoListViewModel.deleteTodo(todo)
+            self.collectionView.reloadData()
+        }
+        
+        
         return cell
     }
     
@@ -112,7 +162,6 @@ class TodoListCell: UICollectionViewCell {
     @IBOutlet weak var lblTodo: UILabel!
     @IBOutlet weak var btnDelete: UIButton!
     @IBOutlet weak var viewStrikeThrough: UIView!
-    
     @IBOutlet weak var viewStrikeThroughWidth: NSLayoutConstraint!
     
     var doneButtonTapHandler: ((Bool) -> Void)?
@@ -132,7 +181,7 @@ class TodoListCell: UICollectionViewCell {
     
     private func showViewStrikeThrough(_ show: Bool) {
         if show {
-            viewStrikeThroughWidth.constant = lblTodo.bounds.width*1.05
+            viewStrikeThroughWidth.constant = lblTodo.bounds.width
         }else {
             viewStrikeThroughWidth.constant = 0
         }
